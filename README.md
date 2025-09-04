@@ -1,1 +1,96 @@
 bus
+
+---
+title: "Starting Wages of CDL-B Drivers by Employer"
+output: html_document
+date: "May 2024"
+---
+
+<style type="text/css">
+
+h1.title {
+  font-size: 38px;
+  font-family: "Chivo Bold";
+  text-align: center;
+}
+h4.date {
+  font-size: 28px;
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+}
+</style>
+
+\
+
+```{r echo=FALSE, include=FALSE}
+library(tidyverse)
+library(patchwork)
+library(gt)
+library(gtExtras)
+library(ggbreak)
+```
+
+
+```{r echo=FALSE}
+employer <- c("CABS", "Dublin City Schools", "MSU", "Central Ohio Contractors", 
+              "UTS", "Columbus City Schools", "RTA", "Baxter", "Caldo Concrete", "Top Coat Concrete",
+              "Urban Express", "Worthington City Schools", "UM", "CCRC", "Redwey Transport",
+              "H&S Asphalt", "UI", "Waste Management", "Apache Logistics", "COTA", "Jones Topsoil",
+              "Anderson Concrete Corp")
+
+employer_simple <- c("CABS", "DCS", "MSU", "COC", 
+              "UTS", "CCS", "RTA", "Baxter", "Caldo Concrete", "TCC",
+              "Urban Express", "WCS", "UM", "CCRC", "RT",
+              "H&S Asphalt", "UI", "WM", "AL", "COTA", "Jones Topsoil",
+              "ACC")
+
+
+starting_wage <- c(20.10, 21.23, 21.84, 22.00, 22.00, 22.15, 22.96, 24.61, 25.00, 25.00, 25.00, 25.31, 
+                   25.59, 25.79, 26.44, 27.00, 27.24, 27.25, 27.40, 27.59, 28.48, 29.32)
+
+employer_full <- c("Campus Area Bus Service", "Dublin City Schools", "Michigan State University",
+                   "Central Ohio Contractors",
+                   "Universal Transportation Systems", "Columbus City Schools", 
+                   "Regional Transit Authority (Cleveland)", "Baxter", "Caldo Concrete", "Top Coat Concrete",
+                   "Urban Express", "Worthington City Schools", "University of Michigan", 
+                   "City of Columbus Refuse Collection", "Redwey Transport", "H&S Asphalt", 
+                   "University of Illinois", "Waste Management", "Apache Logistics",
+                   "Central Ohio Transit Authority", "Jones Topsoil", "Anderson Concrete Corp")
+
+bus <- data.frame(employer, starting_wage)
+
+bus_table <- data.frame(employer_full, starting_wage)
+
+colnames(bus_table) <- c("Employer", "Starting Wage")
+
+bus_table %>%
+  gt() %>% 
+  gt_theme_538()
+```
+
+\
+
+```{r echo=FALSE, fig.align='center'}
+ggplot(data = bus, mapping = aes(x = reorder(employer_simple, starting_wage), y = starting_wage, fill = employer)) + 
+  geom_bar(stat="identity") + scale_x_discrete(guide = guide_axis(n.dodge=3)) +
+  xlab("Employer") + ylab("Starting Wage") + theme(plot.title = element_text(hjust = 0.5)) +
+  scale_y_continuous(breaks = round(seq(16, 30, by = 2),1)) + 
+  scale_fill_manual(name = "employer", 
+                    values=c("grey48", "grey48", "grey48","firebrick2", "grey48", "grey48", "grey48", 
+                             "grey48", "grey48", "grey48", "grey48", "grey48", "grey48", "grey48",
+                             "grey48", "grey48", "grey48", "grey48", "grey48", "grey48", "grey48"
+                             , "grey48")) + theme(legend.position = "none") + scale_y_break(c(0,15))
+```
+
+
+\
+
+According to the U.S. Bureau of Labor Statistics, the mean hourly wage for transit and intercity bus drivers in Ohio is \$27.31, and \$21.10 for school bus drivers in Ohio. Note that the vast majority of Ohio has lower costs of living than Columbus.
+
+
+\
+
+
+
+
+
