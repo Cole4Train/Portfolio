@@ -4,4 +4,8 @@ Ohio bus driver wage data summary and visualization for union negotiation:
 Simple statistical model construction, thorough analysis, Bayesian inference, Monte Carlo simulations:
 [Submariners.pdf](https://github.com/user-attachments/files/22145432/Submariners.pdf)
 
+Time series analysis of tornado fequency, SARIMA modelling, predictive modeling:
+[Tornadoes.pdf](https://github.com/user-attachments/files/22155206/Tornadoes.pdf)
+
+
 
